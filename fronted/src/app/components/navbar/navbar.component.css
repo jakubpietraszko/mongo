@@ -1,0 +1,77 @@
+/* Navbar container */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav li {
+  list-style: none;
+  margin: 0 20px; /* Space between each list item */
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+nav .active {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+/* Adding styles for the role and logout button */
+nav span {
+  color: white;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+nav li a {
+  cursor: pointer;
+}
+
+/* Styling for login/register items (visible when not logged in) */
+div li a {
+  font-size: 14px;
+}
+
+nav li a:hover {
+  background-color: #f44336; /* Red color on hover for logout */
+  border-radius: 5px;
+  color: white;
+}
+
+/* Flexbox properties for better layout when logged in */
+nav div {
+  display: flex;
+  align-items: center;
+}
+
+nav div span {
+  font-weight: bold;
+}
+
+/* Make sure the navigation items are responsive */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav li {
+    margin: 10px 0;
+  }
+}

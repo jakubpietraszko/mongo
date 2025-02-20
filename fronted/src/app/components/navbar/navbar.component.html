@@ -1,0 +1,33 @@
+<nav>
+  <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+
+  <div *ngIf="currentUser?.role === null">
+    <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+    <li><a routerLink="/register-admin" routerLinkActive="active">Register Admin</a></li>
+    <li><a routerLink="/register-medic" routerLinkActive="active">Register Medic</a></li>
+    <li><a routerLink="/register-patient" routerLinkActive="active">Register Patient</a></li>
+  </div>
+
+
+  <div *ngIf="currentUser?.role === 'admin'">
+    <!-- <li><a routerLink="/persistence" routerLinkActive="active">Persistence</a></li> -->
+    <li><a routerLink="/manage-db" routerLinkActive="active">Manage DB</a></li>
+
+  </div>
+
+  <div *ngIf="currentUser?.role === 'medic'">
+    <li><a routerLink="/manage-timetable" routerLinkActive="active">Manage Timetable</a></li>
+    <li><a routerLink="/my-timetable" routerLinkActive="active">Timetable</a></li>
+  </div>
+
+  <div *ngIf="currentUser?.role === 'patient'">
+    <li><a routerLink="/timetables" routerLinkActive="active">Timetables</a></li>
+    <li><a routerLink="/cart" routerLinkActive="active">Cart</a></li>
+  </div>
+
+
+  <div *ngIf="currentUser?.role !== null">
+    <span>{{ currentUser.role }}</span>
+    <li><a (click)="logout()">Logout</a></li>
+  </div>
+</nav>

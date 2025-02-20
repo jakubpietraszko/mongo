@@ -1,0 +1,77 @@
+<div class="container">
+    <h2>Manage Medics</h2>
+    <h3>All Medics</h3>
+
+    <button *ngIf="!isCreating" (click)="createNewMedic()">Add New Medic</button>
+
+    <div *ngIf="isCreating" class="edit-form">
+        <h3>Create New Medic</h3>
+        <form [formGroup]="newMedicForm">
+
+            <label for="name">Name</label>
+            <input id="name" formControlName="name" />
+
+            <label for="surname">Surname</label>
+            <input id="surname" formControlName="surname" />
+
+            <label for="type">Type</label>
+            <input id="type" formControlName="type" />
+
+            <button type="button" (click)="saveNewMedic()">Save</button>
+            <button type="button" (click)="cancelCreate()">Cancel</button> 
+
+        </form>
+    </div>
+
+
+    <div *ngIf="medics.length > 0; else noMedics">
+        <div *ngIf="editIndex !== null" class="edit-form">
+            <h3>Edit Medic</h3>
+            <form [formGroup]="medicForms[editIndex]">
+                <label for="name">Name</label>
+                <input id="name" formControlName="name" />
+
+                <label for="surname">Surname</label>
+                <input id="surname" formControlName="surname" />
+
+                <label for="type">Type</label>
+                <input id="type" formControlName="type" />
+
+                <button type="button" (click)="saveMedic(editIndex)">Save</button>
+                <button type="button" (click)="cancelEdit()">Cancel</button>
+            </form>
+        </div>
+
+
+        <table class="medics-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let medic of medics; let i = index">
+                    <td>{{ medic.name }}</td>
+                    <td>{{ medic.surname }}</td>
+                    <td>{{ medic.type }}</td>
+                    <td>
+                        <button (click)="editMedic(i)">Edit</button>
+                        <button (click)="deleteMedic(i)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #noMedics>
+        <p>No Medics</p>
+    </ng-template>
+
+    <div *ngIf="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+    </div>
+
+</div>

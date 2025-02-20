@@ -1,0 +1,135 @@
+<div class="container">
+    <h2>Manage Visits</h2>
+    <h3>All Visits</h3>
+
+    <button *ngIf="!isCreating" (click)="createNewVisit()">Add New Visit</button>
+
+    <!-- Display New Visit Form -->
+
+    <div *ngIf="isCreating" class="edit-form">
+        <h3>Create New Visit</h3>
+
+        <form [formGroup]="newVisitForm">
+
+            <label for="date" class="form-label">Date</label>
+            <input id="date" formControlName="date" />
+
+            <label for="description" class="form-label">Description</label>
+            <input id="description" formControlName="description" />
+
+            <label for="endTime" class="form-label">End Time</label>
+            <input id="endTime" formControlName="endTime" />
+
+            <label for="medicUid" class="form-label">Medic UID</label>
+            <input id="medicUid" formControlName="medicUid" />
+
+            <label for="paid" class="form-label">Paid</label>
+            <input id="paid" formControlName="paid" />
+
+            <label for="patientUid" class="form-label">Patient UID</label>
+            <input id="patientUid" formControlName="patientUid" />
+
+            <label for="startTime" class="form-label">Start Time</label>
+            <input id="startTime" formControlName="startTime" />
+
+            <label for="status" class="form-label">Status</label>
+            <input id="status" formControlName="status" />
+
+            <label for="type" class="form-label">Type</label>
+            <input id="type" formControlName="type" />
+
+
+            <button type="button" (click)="saveNewVisit()">Save</button>
+            <button type="button" (click)="cancelCreate()">Cancel</button>
+
+        </form>
+    </div>
+
+
+    <div *ngIf="visits.length > 0; else noVisits">
+        <div *ngIf="editIndex !== null" class="edit-form">
+
+            <h3>Edit Visit</h3>
+            <form [formGroup]="visitForms[editIndex]">
+
+
+                <label for="patientUid" class="form-label>">Patient UID</label>
+                <input id="patientUid" formControlName="patientUid" />
+
+                <label for="medicUid" class="form-label">Medic UID</label>
+                <input id="medicUid" formControlName="medicUid" />
+
+                <label for="date" class="form-label">Date</label>
+                <input id="date" formControlName="date" />
+
+
+                <label for="startTime" class="form-label">Start Time</label>
+                <input id="startTime" formControlName="startTime" />
+
+                <label for="endTime" class="form-label">End Time</label>
+                <input id="endTime" formControlName="endTime" />
+
+                <label for="description" class="form-label">Description</label>
+                <input id="description" formControlName="description" />
+
+                <label for="status" class="form-label">Status</label>
+                <input id="status" formControlName="status" />
+
+                <label for="type" class="form-label">Type</label>
+                <input id="type" formControlName="type" />
+
+                <label for="paid" class="form-label">Paid</label>
+                <input id="paid" formControlName="paid" />
+
+                <button type="button" (click)="saveVisit(editIndex)">Save</button>
+                <button type="button" (click)="cancelEdit()">Cancel</button>
+            </form>
+
+
+        </div>
+
+        <table class="visits-table">
+            <thead>
+                <tr>
+                    <th>Patient UID</th>
+                    <th>Medic UID</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                    <th>Paid</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let visit of visits; let i = index">
+                    <td>{{ visit.patientUid }}</td>
+                    <td>{{ visit.medicUid }}</td>
+                    <td>{{ visit.date }}</td>
+                    <td>{{ visit.startTime }}</td>
+                    <td>{{ visit.endTime }}</td>
+                    <td>{{ visit.description }}</td>
+                    <td>{{ visit.status }}</td>
+                    <td>{{ visit.type }}</td>
+                    <td>{{ visit.paid }}</td>
+                    <td>
+                        <button (click)="editVisit(i)">Edit</button>
+                        <button (click)="deleteVisit(i)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <ng-template #noVisits>
+        <p>No Visits</p>
+    </ng-template>
+
+    <div *ngIf="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+    </div>
+</div>

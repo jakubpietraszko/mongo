@@ -1,0 +1,83 @@
+<div class="container">
+  <h2>Manage Ratings</h2>
+  <h3>All Ratings</h3>
+
+
+
+  <button *ngIf="!isCreating" (click)="createNewRating()">Add New Rating</button>
+
+  <!-- Display New Rating Form -->
+  <div *ngIf="isCreating" class="edit-form">
+    <h3>Create New Rating</h3>
+    <form [formGroup]="newRatingForm">
+      <label for="patientUid">Patient UID</label>
+      <input id="patientUid" formControlName="patientUid" />
+
+      <label for="medicUid">Medic UID</label>
+      <input id="medicUid" formControlName="medicUid" />
+
+      <label for="rating">Rating</label>
+      <input id="rating" formControlName="rating" />
+
+      <button type="button" (click)="saveNewRating()">Save</button>
+      <button type="button" (click)="cancelCreate()">Cancel</button>
+    </form>
+  </div>
+
+  <!-- Display Ratings -->
+  <div *ngIf="ratings.length > 0; else noRatings">
+
+
+
+
+    <!-- Editable form for the selected row -->
+    <div *ngIf="editIndex !== null" class="edit-form">
+      <h3>Edit Rating</h3>
+      <form [formGroup]="ratingForms[editIndex]">
+        <label for="patientUid">Patient UID</label>
+        <input id="patientUid" formControlName="patientUid" />
+
+        <label for="medicUid">Medic UID</label>
+        <input id="medicUid" formControlName="medicUid" />
+
+        <label for="rating">Rating</label>
+        <input id="rating" formControlName="rating" />
+
+        <button type="button" (click)="saveRating(editIndex)">Save</button>
+        <button type="button" (click)="cancelEdit()">Cancel</button>
+      </form>
+    </div>
+
+    <table class="ratings-table">
+      <thead>
+        <tr>
+          <th>Patient UID</th>
+          <th>Medic UID</th>
+          <th>Rating</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rating of ratings; let i = index">
+          <td>{{ rating.patientUid }}</td>
+          <td>{{ rating.medicUid }}</td>
+          <td>{{ rating.rating }}</td>
+          <td>
+            <button (click)="editRating(i)">Edit</button>
+            <button (click)="deleteRating(i)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <ng-template #noRatings>
+    <p>No ratings found.</p>
+  </ng-template>
+
+  <!-- Display Error -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>

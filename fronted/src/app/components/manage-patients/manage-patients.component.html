@@ -1,0 +1,95 @@
+<div class="container">
+    <h2>Manage Patients</h2>
+    <h3>All Patients</h3>
+
+    <button *ngIf="!isCreating" (click)="createNewPatient()">Add New Patient</button>
+
+    <!-- Display New Patient Form -->
+    <div *ngIf="isCreating" class="edit-form">
+        <h3>Create New Patient</h3>
+
+        <form [formGroup]="newPatientForm">
+            <label for="name">Name</label>
+            <input id="name" formControlName="name" />
+
+            <label for="surname">Surname</label>
+            <input id="surname" formControlName="surname" />
+
+            <label for="ban">Ban</label>
+            <input id="ban" formControlName="ban" />
+
+            <label for="birthdate">Birthdate</label>
+            <input id="birthdate" formControlName="birthdate" />
+
+            <label for="gender">Gender</label>
+            <input id="gender" formControlName="gender" />
+
+            <button type="button" (click)="saveNewPatient()">Save</button>
+            <button type="button" (click)="cancelCreate()">Cancel</button>
+        </form>
+
+    </div>
+
+    <div *ngIf="patients.length > 0; else noPatients">
+        <div *ngIf="editIndex !== null" class="edit-form">
+
+            <h3>Edit Patient</h3>
+            <form [formGroup]="patientForms[editIndex]">
+                <label for="name">Name</label>
+                <input id="name" formControlName="name" />
+
+                <label for="surname">Surname</label>
+                <input id="surname" formControlName="surname" />
+
+                <label for="ban">Ban</label>
+                <input id="ban" formControlName="ban" />
+
+                <label for="birthdate">Birthdate</label>
+                <input id="birthdate" formControlName="birthdate" />
+
+                <label for="gender">Gender</label>
+                <input id="gender" formControlName="gender" />
+
+                <button type="button" (click)="savePatient(editIndex)">Save</button>
+                <button type="button" (click)="cancelEdit()">Cancel</button>
+
+            </form>
+
+        </div>
+
+
+        <table class="patients-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Ban</th>
+                    <th>Birthdate</th>
+                    <th>Gender</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let patient of patients; let i = index">
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.surname }}</td>
+                    <td>{{ patient.ban }}</td>
+                    <td>{{ patient.birthdate }}</td>
+                    <td>{{ patient.gender }}</td>
+                    <td>
+                        <button (click)="editPatient(i)">Edit</button>
+                        <button (click)="deletePatient(i)">Delete</button>
+                    </td>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template #noPatients>
+        <p>No patients found</p>
+    </ng-template>
+
+    <div *ngIf="errorMessage" class="error-message">
+        <p>{{ errorMessage }}</p>
+    </div>
+</div>

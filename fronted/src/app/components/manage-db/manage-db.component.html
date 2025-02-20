@@ -1,0 +1,57 @@
+<div class="button-container">
+    <!-- <button (click)="selectPane('users')" [ngClass]="{'active': selectedPane === 'users'}">
+        Users
+    </button> -->
+    <button (click)="selectPane('medics')" [ngClass]="{'active': selectedPane === 'medics'}">
+        Medics
+    </button>
+    <button (click)="selectPane('patients')" [ngClass]="{'active': selectedPane === 'patients'}">
+        Patients
+    </button>
+    <button (click)="selectPane('comments')" [ngClass]="{'active': selectedPane === 'comments'}">
+        Comments
+    </button>
+    <button (click)="selectPane('ratings')" [ngClass]="{'active': selectedPane === 'ratings'}">
+        Ratings
+    </button>
+    <button (click)="selectPane('visits')" [ngClass]="{'active': selectedPane === 'visits'}">
+        Visits
+    </button>
+</div>
+
+
+
+<!-- <div *ngIf="selectedPane === 'users'">
+    <h3>Users</h3>
+    <app-manage-users (sendMessage)="onChildMessage($event)"></app-manage-users>
+</div> -->
+<div *ngIf="selectedPane === 'medics'">
+    <h3>Medics</h3>
+    <app-manage-medics (sendMessage)="onChildMessage($event)"></app-manage-medics>
+</div>
+<div *ngIf="selectedPane === 'patients'">
+    <h3>Patients</h3>
+    <app-manage-patients (sendMessage)="onChildMessage($event)"></app-manage-patients>
+</div>
+<div *ngIf="selectedPane === 'comments'">
+    <h3>Comments</h3>
+    <app-manage-comments (sendMessage)="onChildMessage($event)"></app-manage-comments>
+</div>
+<div *ngIf="selectedPane === 'ratings'">
+    <h3>Ratings</h3>
+    <app-manage-ratings (sendMessage)="onChildMessage($event)"></app-manage-ratings>
+</div>
+<div *ngIf="selectedPane === 'visits'">
+    <h3>Visits</h3>
+    <app-manage-visits (sendMessage)="onChildMessage($event)"></app-manage-visits>
+</div>
+
+
+
+
+<div *ngIf="popupMessage" class="popup">
+    <div class="popup-content">
+        <span class="popup-close" (click)="closePopup()">×</span>
+        <p>{{ popupMessage }}</p>
+    </div>
+</div>
